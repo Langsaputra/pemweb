@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Perjumlahan</title>
+</head>
+<body>
+
+  <h1>Perjumlahan</h1>
+<div>
+  <label for="angka1">Angka 1:</label>
+  <input type="number" id="angka1">
+</div>
+<div>
+  <label for="angka2">Angka 2:</label>
+  <input type="number" id="angka2">
+</div>
+  <button onclick="hitung()">Hitung</button>
+
+  <p id="hasil"></p>
+
+  <script>
+    function hitung() {
+      // Mengambil nilai dari input
+      let angka1 = parseInt(document.getElementById('angka1').value);
+      let angka2 = parseInt(document.getElementById('angka2').value);
+
+      // Melakukan perjumlahan
+      let hasil = angka1 + angka2;
+
+      // Menampilkan hasil di dalam elemen
+      document.getElementById('hasil').innerText = "Hasil perjumlahan: " + hasil;
+    }
+  </script>
+
+</body>
+</html>
