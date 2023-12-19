@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Image Picker</h1>
+    <select id="selectLogo">
+        <option value="d.png" selected>Docker</option>
+        <option value="didas.png">Adidas</option>
+        <option value="fy.png">Fairy</option>
+        <option value="ip.jpeg">Ip</option>
+        <option value="pm.png">Puma</option>
+    </select>
+    <br>
+
+    <img src="" id="Image">
+
+    <script>
+        //tangkap element logo
+        const selectLogo = document.getElementById("selectLogo")
+        const Image = document.getElementById("Image")
+
+        selectLogo.addEventListener("change", changeImage)
+
+        function changeImage(){
+            Image.src = "Image/" + selectLogo.value
+        }
+        changeImage()
+
+    </script>
+</body>
+</html>
