@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Validation</title>
+    <style>
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Form Validation</h2>
+
+    <form id="myForm" onsubmit="return validateForm()">
+        <label for="nama">Nama Pelanggan:</label>
+        <input type="text" id="nama" name="nama">
+        <span id="namaError" class="error"></span><br>
+
+        <label for="email">Email:</label>
+        <input type="text" id="email" name="email">
+        <span id="emailError" class="error"></span><br>
+
+        <label for="jam">Jam Keberangkatan:</label>
+        <input type="text" id="jam" name="jam">
+        <span id="jamError" class="error"></span><br>
+
+        <label for="tujuan">Tujuan Keberangkatan:</label>
+        <input type="text" id="tujuan" name="tujuan">
+        <span id="tujuanError" class="error"></span><br>
+
+        <label for="jumlah">Jumlah Tiket:</label>
+        <input type="text" id="jumlah" name="jumlah">
+        <span id="jumlahError" class="error"></span><br>
+
+        <input type="submit" value="Submit">
+    </form>
+
+    <div id="result" style="display: none;">
+        <h3>Data Form:</h3>
+        <p id="resultNama"></p>
+        <p id="resultEmail"></p>
+        <p id="resultJam"></p>
+        <p id="resultTujuan"></p>
+        <p id="resultJumlah"></p>
+    </div>
+
+    <script>
+        function validateForm() {
+            var nama = document.getElementById("nama").value;
+            var email = document.getElementById("email").value;
+            var jam = document.getElementById("jam").value;
+            var tujuan = document.getElementById("tujuan").value;
+            var jumlah = document.getElementById("jumlah").value;
+
+            var namaError = document.getElementById("namaError");
+            var emailError = document.getElementById("emailError");
+            var jamError = document.getElementById("jamError");
+            var tujuanError = document.getElementById("tujuanError");
+            var jumlahError = document.getElementById("jumlahError");
+
+            // Validasi Nama
+            if (nama === "") {
+                namaError.textContent = "Nama Pelanggan wajib diisi";
+                return false;
+            } else if (nama.length > 30) {
+                namaError.textContent = "Nama Pelanggan maksimal 30 karakter";
+                return false;
+            } else {
+                namaError.textContent = "";
+            }
+
+            // Validasi Email
+            if (email === "") {
+                emailError.textContent = "Email wajib diisi";
+                return false;
+            } else {
+                var emailRegex = /^\S+@\S+\.\S+$/;
+                if (!emailRegex.test(email)) {
+                    emailError.textContent = "Format email tidak valid";
+                    return false;
+                } else {
+                    emailError.textContent = "";
+                }
+            }
+
+            // Validasi Jam Keberangkatan
+            if (jam === "") {
+                jamError.textContent = "Jam Keberangkatan wajib diisi";
+                return false;
+            } else {
+                var jamRegex = /^([01]?[0-9]|2[0-3]):[0-5][0-9]$/;
+                if (!jamRegex.test(jam)) {
+                    jamError.textContent = "Format jam tidak valid (00:00 - 23:59)";
+                    return false;
+                } else {
+                    jamError.textContent = "";
+                }
+            }
+
+            // Validasi Tujuan Keberangkatan
+            if (tujuan === "") {
+                tujuanError.textContent = "Tujuan Keberangkatan wajib diisi";
+                return false;
+            } else {
+                tujuanError.textContent = "";
+            }
+
+            // Validasi Jumlah Tiket
+            if (jumlah === "") {
+                jumlahError.textContent = "Jumlah Tiket wajib diisi";
+                return false;
+            } else {
+                var jumlahInt = parseInt(jumlah);
+                if (isNaN(jumlahInt) || jumlahInt < 1 || jumlahInt > 10) {
+                    jumlahError.textContent = "Jumlah Tiket harus bilangan bulat antara 1 - 10";
+                    return false;
+                } else {
+                    jumlahError.textContent = "";
+                }
+            }
+
+            // Jika semua validasi berhasil, tampilkan hasil
+            showResult(nama, email, jam, tujuan, jumlah);
+            
+            return false; // Hindari pengiriman form (untuk keperluan contoh ini)
+        }
+
+        function showResult(nama, email, jam, tujuan, jumlah) {
+            document.getElementById("resultNama").textContent = "Nama Pelanggan: " + nama;
+            document.getElementById("resultEmail").textContent = "Email: " + email;
+            document.getElementById("resultJam").textContent = "Jam Keberangkatan: " + jam;
+            document.getElementById("resultTujuan").textContent = "Tujuan Keberangkatan: " + tujuan;
+            document.getElementById("resultJumlah").textContent = "Jumlah Tiket: " + jumlah;
+
+            document.getElementById("result").style.display = "block";
+        }
+    </script>
+
+</body>
+</html>
